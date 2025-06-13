@@ -1,0 +1,176 @@
+import random
+
+print("\nChoose a subject:")
+print("1. Python")
+print("2. General Knowledge")
+print("3. Data Structures")
+
+subject_choice = input("Enter your choice (1/2/3): ").strip()
+subject_map = {
+    '1': ('Python', {
+    'easy': {
+        'What is the keyword to define a function in Python?': ['a. def', 'b. func', 'c. function', 'd. define', 'a'],
+        'Which symbol is used to comment a single line in Python?': ['a. //', 'b. <!--', 'c. #', 'd. /*', 'c'],
+        'Which keyword is used to start a loop in Python?': ['a. repeat', 'b. for', 'c. loop', 'd. iterate', 'b'],
+        'What data type is the value: "Hello"?': ['a. int', 'b. str', 'c. list', 'd. char', 'b'],
+        'Which of these is a Python data structure?': ['a. array', 'b. vector', 'c. tuple', 'd. matrix', 'c'],
+        'Which operator is used for addition in Python?': ['a. &', 'b. +', 'c. add', 'd. ++', 'b'],
+        'What is the output of: print(len("abc"))?': ['a. 2', 'b. 3', 'c. 4', 'd. Error', 'b']
+    },
+    'moderate': {
+        'What is the output of: print(2 ** 3)?': ['a. 5', 'b. 6', 'c. 8', 'd. 9', 'c'],
+        'Which data type is immutable in Python?': ['a. List', 'b. Dictionary', 'c. Set', 'd. Tuple', 'd'],
+        'What is the output of: print(type([]))?': ['a. <class "list">', 'b. list', 'c. <type list>', 'd. <list>', 'a'],
+        'What is the correct way to import a module?': ['a. include math', 'b. import math', 'c. use math', 'd. using math', 'b'],
+        'What does the range(5) function return?': ['a. [0,1,2,3,4]', 'b. [1,2,3,4,5]', 'c. [0,1,2,3,4,5]', 'd. (0 to 5)', 'a'],
+        'Which statement will check if x is not equal to y?': ['a. x != y', 'b. x <> y', 'c. not x == y', 'd. all of the above', 'd'],
+        'Which method adds an item to a list?': ['a. add()', 'b. insert()', 'c. push()', 'd. append()', 'd']
+    },
+    'hard': {
+        'What does the “self” keyword represent in Python classes?': ['a. It represents a module', 'b. It refers to the parent class', 'c. It refers to the instance of the class', 'd. It is a global variable', 'c'],
+        'What is a lambda function?': ['a. A function with no parameters', 'b. A function with no return', 'c. A single-expression anonymous function', 'd. A recursive function', 'c'],
+        'What is list comprehension in Python?': ['a. A way to define functions', 'b. A syntax for creating lists from other iterables', 'c. A debugging tool', 'd. A library', 'b'],
+        'What will be the result of: [x for x in range(5) if x%2==0]?': ['a. [1,3,5]', 'b. [0,2,4]', 'c. [2,4]', 'd. [0,2,4,6]', 'b'],
+        'What does the zip() function do?': ['a. Compress data', 'b. Join multiple iterables element-wise', 'c. Encrypt strings', 'd. Unpack values', 'b'],
+        'What will be the output of: bool("False")?': ['a. True', 'b. False', 'c. Error', 'd. None', 'a']
+    }
+}),
+    '2': ('General Knowledge', {
+    'easy': {
+        'What is the capital of France?': ['a. Paris', 'b. London', 'c. Berlin', 'd. Rome', 'a'], 
+        'What is 2 + 2?': ['a. 3', 'b. 4', 'c. 5', 'd. 6', 'b'],
+        'Which planet is known as the Red Planet?': ['a. Earth', 'b. Mars', 'c. Jupiter', 'd. Saturn', 'b'],
+        'What color are bananas when ripe?': ['a. Red', 'b. Yellow', 'c. Green', 'd. Blue', 'b'],
+        'Which animal is known as the king of the jungle?': ['a. Tiger', 'b. Elephant', 'c. Lion', 'd. Giraffe', 'c'],
+        'How many days are there in a week?': ['a. 5', 'b. 6', 'c. 7', 'd. 8', 'c'],
+        'Which shape has 3 sides?': ['a. Circle', 'b. Square', 'c. Triangle', 'd. Hexagon', 'c']
+    },
+    'moderate': {
+        'Which is the longest river in India?': ['a. Ganga', 'b. Brahmaputra', 'c. Indus', 'd. Godavari', 'a'], 
+        'Who wrote the national anthem of India?': ['a. Rabindranath Tagore', 'b. Mahatma Gandhi', 'c. Subhash Chandra Bose', 'd. Jawaharlal Nehru', 'a'],
+        'Who was the first President of India?': ['a. B. R. Ambedkar', 'b. Dr. Rajendra Prasad', 'c. Sardar Patel', 'd. Jawaharlal Nehru', 'b'],
+        'Which is the largest continent?': ['a. Africa', 'b. Asia', 'c. Europe', 'd. Antarctica', 'b'],
+        'Which country is known as the Land of the Rising Sun?': ['a. China', 'b. South Korea', 'c. Japan', 'd. Thailand', 'c'],
+        'Who invented the telephone?': ['a. Alexander Graham Bell', 'b. Thomas Edison', 'c. Nikola Tesla', 'd. Isaac Newton', 'a'],
+        'Which organ pumps blood throughout the human body?': ['a. Brain', 'b. Liver', 'c. Heart', 'd. Lungs', 'c']
+    },
+    'hard': {
+        'What is the chemical symbol for gold?': ['a. Au', 'b. Ag', 'c. Pb', 'd. Fe', 'a'],
+        'In which year did World War II end?': ['a. 1944', 'b. 1945', 'c. 1946', 'd. 1947', 'b'],
+        'Which country has the largest population in the world?': ['a. India', 'b. USA', 'c. China', 'd. Russia', 'c'],
+        'What is the currency of Japan?': ['a. Yuan', 'b. Yen', 'c. Won', 'd. Dollar', 'b'],
+        'Which Indian scientist won a Nobel Prize for Physics?': ['a. Homi Bhabha', 'b. C. V. Raman', 'c. A. P. J. Abdul Kalam', 'd. Venkatraman Ramakrishnan', 'b'],
+        'Which planet has the most moons?': ['a. Jupiter', 'b. Saturn', 'c. Mars', 'd. Uranus', 'b']
+    }
+}),
+    '3': ('Data Structures', {
+        'easy': {
+        'Which data structure uses FIFO order?': ['a. Stack', 'b. Queue', 'c. Tree', 'd. Graph', 'b'],
+        'Which of the following is a linear data structure?': ['a. Tree', 'b. Graph', 'c. Array', 'd. Hash Table', 'c'],
+        'Which data structure uses LIFO order?': ['a. Queue', 'b. Stack', 'c. Linked List', 'd. Graph', 'b'],
+        'Which data structure stores elements sequentially?': ['a. Linked List', 'b. Tree', 'c. Array', 'd. Hash Table', 'c'],
+        'What is the time complexity to access an element in an array by index?': ['a. O(1)', 'b. O(n)', 'c. O(log n)', 'd. O(n^2)', 'a'],
+        'Which of the following is not a linear data structure?': ['a. Stack', 'b. Array', 'c. Tree', 'd. Queue', 'c'],
+        'Which data structure is best for implementing undo functionality?': ['a. Queue', 'b. Stack', 'c. Array', 'd. Graph', 'b']
+    },
+    'moderate': {
+        'Which data structure is used in recursion?': ['a. Stack', 'b. Queue', 'c. Array', 'd. Heap', 'a'],
+        'What is the time complexity of binary search in a sorted array?': ['a. O(n)', 'b. O(n log n)', 'c. O(log n)', 'd. O(1)', 'c'],
+        'Which traversal visits root, left, right in a binary tree?': ['a. Inorder', 'b. Postorder', 'c. Preorder', 'd. Level order', 'c'],
+        'Which data structure uses key-value pairs?': ['a. Array', 'b. Stack', 'c. Dictionary', 'd. List', 'c'],
+        'Which data structure is used in Breadth First Search (BFS)?': ['a. Stack', 'b. Queue', 'c. Tree', 'd. Heap', 'b'],
+        'What is the maximum number of children a binary tree node can have?': ['a. 1', 'b. 2', 'c. 3', 'd. Unlimited', 'b'],
+        'Which of these data structures is dynamically resizable?': ['a. List in Python', 'b. Static array', 'c. C array', 'd. None', 'a']
+    },
+    'hard': {
+        'What is the time complexity of searching in a balanced binary search tree?': ['a. O(n)', 'b. O(log n)', 'c. O(n log n)', 'd. O(1)', 'b'],
+        'Which heap is used in priority queues?': ['a. Binary heap', 'b. Ternary heap', 'c. Fibonacci heap', 'd. Pairing heap', 'a'],
+        'Which data structure is used for Depth First Search (DFS)?': ['a. Queue', 'b. Stack', 'c. Heap', 'd. Array', 'b'],
+        'Which traversal of a binary search tree returns sorted order?': ['a. Inorder', 'b. Preorder', 'c. Postorder', 'd. Level order', 'a'],
+        'Which of the following is a non-linear data structure?': ['a. Stack', 'b. Linked List', 'c. Graph', 'd. Queue', 'c'],
+        'Which algorithm is used to detect cycles in a graph?': ['a. BFS', 'b. DFS', 'c. Dijkstra', 'd. Kruskal', 'b']
+    }
+})
+}
+
+if subject_choice not in subject_map:
+    print("Invalid choice. Exiting.")
+    exit()
+
+subject_name, questions = subject_map[subject_choice]
+print(f"\nYou selected: {subject_name}")
+
+print("\nEnter total marks for the quiz:")
+total_marks = int(input())  
+easy = int(total_marks * 0.5)
+diff = int(total_marks * 0.3)
+q_d = diff // 3
+mod = int(total_marks * 0.2)
+
+print("Easy Questions:", easy)
+print("Moderate Questions:", mod)
+print("Difficult Questions:", diff)
+easy_count = total_marks // 2
+moderate_count = total_marks // 10 * 2
+hard_count = total_marks // 20
+
+marks = 0
+total_possible = 0
+selected_questions = []
+
+easy_selected = random.sample(list(questions['easy'].items()), min(len(questions['easy']), easy_count))
+moderate_selected = random.sample(list(questions['moderate'].items()), min(len(questions['moderate']), moderate_count))
+hard_selected = random.sample(list(questions['hard'].items()), min(len(questions['hard']), hard_count))
+
+selected_questions += easy_selected + moderate_selected + hard_selected
+
+user_answers = []
+
+for question, options in selected_questions:
+    print("\n" + question)
+    for option in options[:-1]:
+        print(option)
+    
+    ans = input("Enter your answer (a/b/c/d) or type 'exit' to quit: ").strip().lower()
+    if ans == 'exit':
+        print("\nYou chose to exit the quiz early.")
+        break
+
+    correct_answer = options[-1]
+    user_answers.append((question, options, ans))
+
+    if ans == correct_answer.lower():
+        #print("Correct!")
+        if question in questions['easy']:
+            marks += 1
+            total_possible += 1
+        elif question in questions['moderate']:
+            marks += 2
+            total_possible += 2
+        elif question in questions['hard']:
+            marks += 3
+            total_possible += 3
+    else:
+        #print(f"Wrong. The correct answer is: {correct_answer}")
+        if question in questions['easy']:
+            total_possible += 1
+        elif question in questions['moderate']:
+            total_possible += 2
+        elif question in questions['hard']:
+            total_possible += 3
+
+# Final result
+per = (marks / total_marks) * 100 if total_possible > 0 else 0
+print(f'\nTotal marks: {marks:.2f}')
+print(f'Total percentage: {per:.2f}%')
+
+# Ask user if they want to see correct answers
+view_answers = input("\nDo you want to see all correct answers? (yes/no): ").strip().lower()
+if view_answers == 'yes':
+    print("\nHere are the correct answers:\n")
+    for question, options, user_ans in user_answers:
+        print(f"Q: {question}")
+        for opt in options[:-1]:
+            print(opt)
+        print(f"Your Answer: {user_ans}")
+        print(f"Correct Answer: {options[-1]}\n")
